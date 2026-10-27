@@ -1,0 +1,37 @@
+/* DATrace at UC Davis — branding styles shared by the index pages and the
+   visualization pages. Aggie Blue #022851, Aggie Gold #FFBF00.
+   Loaded after visualPages.css / visualizationPageStyle.css. */
+
+#dtMasthead {
+  max-width: 1000px;
+  margin: 18px auto 6px auto;
+  padding: 0 10px 8px 10px;
+  border-bottom: 2px solid #022851;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  text-align: left;
+}
+#dtMasthead a { line-height: 0; }
+#dtMasthead .dtWordmark { height: 30px; display: block; }
+#dtMasthead .dtCampus { height: 22px; display: block; }
+
+#dtFooter {
+  max-width: 1000px;
+  margin: 24px auto 18px auto;
+  padding: 8px 10px 0 10px;
+  border-top: 1px solid #022851;
+  font: 80% Verdana, Arial, Helvetica, sans-serif;
+  color: #444;
+  text-align: left;
+}
+#dtFooter a { color: #022851; text-decoration: none; }
+#dtFooter a:hover { color: #C99700; }
+
+/* Visualization pages: the masthead is the only banner; the algorithm name
+   becomes a plain heading and the old green footer bar becomes #dtFooter. */
+.VisualizationMainPage #header { background: #ffffff; color: #022851; padding: 0 20px; }
+.VisualizationMainPage #header h1 { color: #022851; font-size: 150%; padding: 6px 0 2px 0; }
+.VisualizationMainPage #mainContent h1,
+.VisualizationMainPage #mainContent h2,
+.VisualizationMainPage #mainContent h3 { color: #022851; }

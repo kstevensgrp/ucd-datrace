@@ -17,6 +17,9 @@ serve `site/`.
   is one `*.html` page plus a matching file in `site/AlgorithmLibrary/`.
   `AnimationLibrary/` is the shared animation engine; `ThirdParty/` is
   jQuery 1.5 / jQuery UI 1.8.
+- `site/datrace.css`, `site/img/`, `site/favicon.*` — the UC Davis branding
+  (masthead, wordmark, favicon). Galles' two stock stylesheets are recolored
+  in place; everything else about the look is in `datrace.css`.
 - `UPSTREAM.txt` — where the code came from, the tarball checksum, and what
   was dropped on import.
 - `LICENSE.txt` — Galles' BSD 2-clause license, which also appears at the

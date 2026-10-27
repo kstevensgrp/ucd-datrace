@@ -41,21 +41,21 @@ margin-left:30px;
 .menu a {
   font-weight: bold;
   text-decoration: none;
-    color:#006633;
+    color:#022851;
 }
 
 
 .content h1 {
-    color:#006633;
+    color:#022851;
 }
 
 
 .content h2 {
-    color:#006633;
+    color:#022851;
 }
 
 .content h3 {
-    color:#006633;
+    color:#022851;
 }
 
 
@@ -63,17 +63,17 @@ margin-left:30px;
 .content a {
   //font-weight: bold;
   text-decoration: none;
-    color:#006633;
+    color:#022851;
 }
 
 .content a:hover {
-	color:#ffCC33;
+	color:#C99700;
 }
 
 
 
 .menu a:hover {
-	color:#ffCC33;
+	color:#C99700;
 }
 
 .menu a:visited {
@@ -85,11 +85,11 @@ margin-left:30px;
 .about a {
   font-weight: bold;
   text-decoration: none;
-    color:#006633;
+    color:#022851;
 }
 
 .about a:hover {
-	color:#ffCC33;
+	color:#C99700;
 }
 
 .about a:visited {
@@ -104,16 +104,16 @@ margin-left:30px;
 }
 
 .personal a {
-	color:#ffCC33;
+	color:#C99700;
   text-decoration: none;
 }
 
 .personal a:hover {
-	color:#ffCC33;
+	color:#C99700;
 }
 
 .personal a:visited {
-  color: #006633;
+  color: #022851;
 }
 
 
@@ -135,16 +135,16 @@ div.header,div.footer
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
 
 	padding: 0 10px 0 20px; 
-	color:#ffCC33;
+	color:#C99700;
 
-	background: #006633; 
+	background: #022851; 
 
 /* border:1px solid grey; */
 }
 
 .footer a
 {
-	color:#ffCC33;
+	color:#C99700;
 }
 
 h1.header
@@ -155,7 +155,7 @@ margin:0;
 div.content
 {
 margin-left:180px;
-border-left:1px solid #006633;
+border-left:1px solid #022851;
 padding:1em;
 }
 

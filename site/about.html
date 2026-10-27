@@ -1,13 +1,15 @@
 <html>
 <head>
 <link rel="stylesheet" href="visualPages.css">
-<title> Data Structure Visualization   </title>
-<link rel="shortcut icon" href="favicon.ico" />
+<title>DATrace @ UC Davis</title>
+<link rel="stylesheet" href="datrace.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" href="favicon.ico"/>
 </head>
 <body>
 
 <div class="container">
-<div class="header"><h1>Data Structure Visualizations</h1>  </div>
+<div id="dtMasthead"><a href="Algorithms.html" title="DATrace"><img class="dtWordmark" src="img/datrace-wordmark.svg" alt="DATrace"/></a><img class="dtCampus" src="img/ucdavis-wordmark-blue.png" alt="UC Davis"/></div>
 <div class="menu">
 <ul>
 <li> <a href="about.html">About</a> </li>
@@ -19,32 +21,33 @@
 
 <br> <br>
 <div class="about">
-<a href="http://www.cs.usfca.edu/galles"> David Galles </a> <br>
-<a href="http://www.cs.usfca.edu"> Computer Science </a> <br>
-<a href="http://www.usfca.edu"> University of San Francisco </a>  
+<a href="https://cs.ucdavis.edu">Computer Science</a><br>
+<a href="https://www.ucdavis.edu">UC Davis</a>
 </div>
 
 </div>
 
 <div class="content">
 
-<h1>Visualizing Algorithms</h1>
+<h1>About DATrace</h1>
 
-The best way to understand complex data structures is to see them in action. We've developed interactive animations for a 
-variety of data structures and algorithms. Our visualization tool is written in javascript using the HTML5 canvas element,
-and run in just about any modern browser  -- including iOS devices like the iPhone and iPad, and even the web browser in
-the Kindle!  (The frame rate is low enough in the Kindle that the visualizations aren't terribly useful, but the tree-based 
-visualizations -- BSTs and AVL Trees -- seem to work well enough)
+DATrace is a collection of interactive animations of the data structures and
+algorithms taught in introductory computer science courses at UC Davis. Pick a
+structure from the <a href="Algorithms.html">Algorithms</a> page, insert and
+remove values, and watch each step of the algorithm play out. The animations
+run entirely in your browser; nothing is sent to a server.
 
 <br> <br>
-Check the <a href = "Algorithms.html">Algorithms</a> menu for all of the latest javascript implementations.
+DATrace is the companion to <a href="https://codetrace.cs.ucdavis.edu">CodeTrace</a>,
+which traces the execution of your own program line by line. Where CodeTrace shows
+what <em>your</em> code does, DATrace shows what the standard algorithms do.
 
 <h1> How to Use the Visualizations </h1>
 
-This visualizations are meant to be fairly self- explainitory, though there are some subleties for advanced usage.   Take a look at a
+The visualizations are meant to be fairly self-explanatory, though there are some subtleties for advanced usage. Take a look at a
 typical visualization, for Binary Search Trees:
 
-<br> <br> 
+<br> <br>
 
 <img src="Screenshot.png" alt="BST Screenshot">
 <br>
@@ -52,8 +55,8 @@ typical visualization, for Binary Search Trees:
 <h2> Algorithm Specific Controls </h2>
 At the top of the screen (boxed in red in the above screenshot) are the algorithm specific controls -- these will change depending upon
 what algorithm you are visualizing.  In this example, you could insert, delete, or find an element in the BST by entering text in the
-appropriate field and either pressing return or clicking the relevant button.  The tree can be printed by clicking the print button.  
-Once you give a command, the visualiztion will start, and can be controlled by the general animation controls at the bottom of the screen.
+appropriate field and either pressing return or clicking the relevant button.  The tree can be printed by clicking the print button.
+Once you give a command, the visualization will start, and can be controlled by the general animation controls at the bottom of the screen.
 
 <h2> General Animation Controls </h2>
 
@@ -88,26 +91,18 @@ forward when you are first delving into a particular algorithm.
 </ul>
 
 
-<h1>Java/Swing Version</h1>
-This work is based on visualizations that we created in Java using Swing -- that code is still available <a href = "https://www.cs.usfca.edu/~galles/visualization/java/visualization.html">here</a>, 
-though that code is no longer being maintained.  There are a few algorithms that we have not yet ported to the new system,
-so the older version may still be of use.
+<h1>Credits</h1>
 
-<h1>Flash Version</h1>
-We have also developed a <a href = "https://www.cs.usfca.edu/~galles/visualization/flash.html">flash</a> version of the visualizations,  which contains a subset of
-the algoritms developed in javascript.  The Flash version is not as well supported as the main javascript version,
-but we will keep the flash version available for those who may get a better frameate out of flash than javascript.
-However, the javascript versions are the preferred ones, and will get updates and bug fixes the quickest.  
-
-<h1>Writing your Own</h1>
- <a href="https://www.cs.usfca.edu/~galles/visualization/source.html">The tutorial for creating your own visualizations is now online!</a>
-All source code is available there as well.  If you want to create your own visualizations, but are having trouble
-getting things to work, please let me know.  Everything is licensed under FreeBSD, and you
-can use it for whatever you like.  Please let me know if you using the code -- I'm curious to see what
-it does in the wild.
+The visualizations, animation engine and this help text are the work of
+<a href="https://www.cs.usfca.edu/~galles">David Galles</a> at the University of San Francisco,
+who released them as open source under the BSD license
+(<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">original site</a>,
+<a href="https://www.cs.usfca.edu/~galles/visualization/source.html">source and tutorial</a>).
+DATrace adds UC Davis branding and hosting; the code for this site is at
+<a href="https://github.com/kstevensgrp/ucd-datrace">github.com/kstevensgrp/ucd-datrace</a>.
 
 </div>
-<div class="footer">Copyright 2011 <a href = "http://www.cs.usfca.edu/galles">David Galles </a> </div>
+<div id="dtFooter">DATrace @ UC Davis is based on David Galles&#8217; <a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Data Structure Visualizations</a> (University of San Francisco), copyright 2011 David Galles, BSD license. Source: <a href="https://github.com/kstevensgrp/ucd-datrace">github.com/kstevensgrp/ucd-datrace</a>.</div>
 
 </div>
 

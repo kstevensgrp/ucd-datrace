@@ -31,7 +31,7 @@ body {
 
 .VisualizationMainPage #algoControlSection
 {
-	background: #DDEEDD; 
+	background: #E6EDF5; 
 	color:#000000; 
 
 }
@@ -39,21 +39,21 @@ body {
 
 .VisualizationMainPage #generalAnimationControlSection
 {
-	background: #DDEEDD; 
-	color:#006600; 
+	background: #E6EDF5; 
+	color:#022851; 
 
 }
 
 .VisualizationMainPage  #header { 
-	background: #006633; 
-	color:#ffCC33;
+	background: #022851; 
+	color:#C99700;
 	padding: 0 10px 0 20px; 
   
 } 
  
 .VisualizationMainPage #header  A:visited 
 	  { text-decoration:none;
-        color:#ffCC33; 
+        color:#C99700; 
 	   }
 	   
 	   
@@ -64,7 +64,7 @@ body {
 	   
 .VisualizationMainPage #header A:link {
     text-decoration:none;
-    color:#ffCC33;
+    color:#C99700;
 	}
 	
 	
@@ -76,12 +76,12 @@ body {
 	
 	
 .VisualizationMainPage #footer  A:visited { text-decoration:none;
-        color:ffcc33; 
+        color:#C99700; 
 }
 
 .VisualizationMainPage #footer A:link {
     text-decoration:none;
-	color:#ffCC33;
+	color:#C99700;
 }
 
 
@@ -90,27 +90,27 @@ body {
 .VisualizationMainPage #mainContent h1{
 	padding: 0 20px; 
 	background: #FFFFFF;
-	color:#006633
+	color:#022851
 }
 
 .VisualizationMainPage #mainContent h2{
 	padding: 0 20px; 
 	background: #FFFFFF;
-	color:#006633
+	color:#022851
 }
 
 .VisualizationMainPage #mainContent h3{
 	padding: 0 20px; 
 	background: #FFFFFF;
-	color:#006633
+	color:#022851
 }
 
 
 
 .VisualizationMainPage #footer { 
 	padding: 0 10px;
-    background: #006633; 
-	color:#ffcc33;
+    background: #022851; 
+	color:#C99700;
 } 
 .VisualizationMainPage #footer p {
 	margin: 0; 	padding: 10px 0; 
