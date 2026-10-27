@@ -37,4 +37,4 @@ python3 -m http.server 8080
 
 Copyright 2011 David Galles, University of San Francisco. Redistributed under
 the BSD 2-clause license in `LICENSE.txt`. UC Davis branding, page text and
-any later changes are by Kristian Stevens (kastevens@ucdavis.edu).
+any later changes are by Kristian Stevens.
