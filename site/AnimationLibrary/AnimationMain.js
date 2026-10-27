@@ -511,8 +511,10 @@ function AnimationManager(objectManager)
 
 	this.parseBool = function(str)
 	{
-		var uppercase = str.toUpperCase();
-		var returnVal =  !(uppercase == "False" || uppercase == "f" || uppercase == " 0" || uppercase == "0" || uppercase == "");
+		// DATrace: compare against upper-case literals; upstream compared the upper-cased
+		// string to "False" and "f", so the literal false was always read as true.
+		var uppercase = String(str).toUpperCase();
+		var returnVal =  !(uppercase == "FALSE" || uppercase == "F" || uppercase == " 0" || uppercase == "0" || uppercase == "");
 		return returnVal;
 
 	}
