@@ -32,20 +32,18 @@
 // repeated substring query. Edge labels are substrings; leaves hold the start index of
 // their suffix; "$" is the end-of-string terminator and sorts before every other character.
 
-SuffixTree.NODE_WIDTH = 28;
+SuffixTree.NODE_WIDTH = 30;
 SuffixTree.LINK_COLOR = "#022851";
 SuffixTree.HIGHLIGHT_CIRCLE_COLOR = "#C99700";
 SuffixTree.FOREGROUND_COLOR = "#022851";
 SuffixTree.INTERNAL_COLOR = "#FFFFFF";
 SuffixTree.LEAF_COLOR = "#FFE9A8";
 SuffixTree.FOUND_COLOR = "#FFBF00";
-SuffixTree.CHAR_WIDTH = 7;          // pixels per edge-label character
 SuffixTree.LABEL_AT = 0.6;          // where along the edge (parent -> child) the label sits
 SuffixTree.LABEL_COLOR = "#022851";
 SuffixTree.HEIGHT_DELTA = 64;
 SuffixTree.STARTING_Y = 70;
-SuffixTree.NEW_NODE_X = 40;
-SuffixTree.NEW_NODE_Y = 60;
+SuffixTree.SPLIT_AT = 0.35;         // where along the old edge a split node first appears
 SuffixTree.MAX_LENGTH = 16;
 
 function SuffixTree(am, w, h)
@@ -205,17 +203,18 @@ SuffixTree.prototype.fixDepths = function(node)
 
 // ---------------------------------------------------------------- drawing helpers
 
-SuffixTree.prototype.newNode = function(label, leafIndex)
+// Create a node at (x, y), near where it belongs, so it never flashes up in a corner;
+// the next resizeTree() slides it into its final place.
+SuffixTree.prototype.newNode = function(label, leafIndex, parent, x, y)
 {
 	var node = new SuffixTreeNode(this.nextIndex++, label, leafIndex);
-	this.cmd("CreateCircle", node.graphicID, leafIndex >= 0 ? String(leafIndex) : "",
-	         SuffixTree.NEW_NODE_X, SuffixTree.NEW_NODE_Y);
+	this.cmd("CreateCircle", node.graphicID, leafIndex >= 0 ? String(leafIndex) : "", x, y);
 	this.cmd("SetForegroundColor", node.graphicID, SuffixTree.FOREGROUND_COLOR);
 	this.cmd("SetBackgroundColor", node.graphicID,
 	         leafIndex >= 0 ? SuffixTree.LEAF_COLOR : SuffixTree.INTERNAL_COLOR);
 	this.cmd("SetWidth", node.graphicID, SuffixTree.NODE_WIDTH);
-	node.x = SuffixTree.NEW_NODE_X;
-	node.y = SuffixTree.NEW_NODE_Y;
+	node.x = x;
+	node.y = y;
 	// The edge label is a text object threaded onto the edge (parent -> label -> child): edges
 	// attach to a label's bounding box, so the line visibly breaks around the text. Connect's
 	// own midpoint label cannot be used: the framework draws edges over everything, and sibling
@@ -223,15 +222,44 @@ SuffixTree.prototype.newNode = function(label, leafIndex)
 	if (label.length > 0)
 	{
 		node.labelID = this.nextIndex++;
-		this.cmd("CreateLabel", node.labelID, label, node.x, node.y - 30, 1);
+		var lx = parent ? parent.x + SuffixTree.LABEL_AT * (x - parent.x) : x;
+		var ly = parent ? parent.y + SuffixTree.LABEL_AT * (y - parent.y) : y - 30;
+		this.cmd("CreateLabel", node.labelID, label, lx, ly, 1);
 		this.cmd("SetForegroundColor", node.labelID, SuffixTree.LABEL_COLOR);
 	}
 	return node;
 }
 
+// Where a new child of parent first appears: one level down, right of its existing children.
+SuffixTree.prototype.spawnBelow = function(parent)
+{
+	var dy = this.levelDy || SuffixTree.HEIGHT_DELTA;
+	var x = parent.x;
+	for (var i = 0; i < parent.children.length; i++)
+	{
+		x = Math.max(x, parent.children[i].x + SuffixTree.NODE_WIDTH * 1.5);
+	}
+	return [Math.min(x, this.canvasWidth - SuffixTree.NODE_WIDTH), parent.y + dy];
+}
+
+// Edge-label width in the real canvas font, so layout follows CANVAS_FONT_SIZE.
 SuffixTree.prototype.labelWidth = function(label)
 {
-	return label.length * SuffixTree.CHAR_WIDTH + 6;
+	if (this.measureContext == null)
+	{
+		this.measureContext = document.createElement("canvas").getContext("2d");
+	}
+	this.measureContext.font = CANVAS_FONT;
+	return this.measureContext.measureText(label).width + 6;
+}
+
+SuffixTree.prototype.scaleWidths = function(node, factor)
+{
+	node.width *= factor;
+	for (var i = 0; i < node.children.length; i++)
+	{
+		this.scaleWidths(node.children[i], factor);
+	}
 }
 
 SuffixTree.prototype.labelPos = function(node)
@@ -359,9 +387,16 @@ SuffixTree.prototype.resizeTree = function()
 {
 	if (this.root == null) return;
 	this.resizeWidths(this.root);
+	// too wide for the canvas: squeeze every subtree proportionally (labels may then crowd)
+	var available = this.canvasWidth - 20;
+	if (this.root.width > available)
+	{
+		this.scaleWidths(this.root, available / this.root.width);
+	}
 	var levels = this.treeHeight(this.root);
 	var dy = Math.min(SuffixTree.HEIGHT_DELTA,
 	                  Math.max(34, (this.canvasHeight - SuffixTree.STARTING_Y - 30) / Math.max(1, levels - 1)));
+	this.levelDy = dy;
 	var x = Math.max(this.root.width / 2 + 10, this.startingX);
 	this.setNewPositions(this.root, x, SuffixTree.STARTING_Y, dy);
 	this.animateNewPositions(this.root);
@@ -384,7 +419,7 @@ SuffixTree.prototype.build = function(s)
 	this.setStatus(2, "Appending the terminator $ so that no suffix is a prefix of another suffix");
 	this.cmd("Step");
 
-	this.root = this.newNode("", -1);
+	this.root = this.newNode("", -1, null, this.startingX, SuffixTree.STARTING_Y);
 	this.root.depth = 0;
 	this.setStatus(2, "Creating the root");
 	this.cmd("Step");
@@ -420,7 +455,8 @@ SuffixTree.prototype.insertSuffix = function(node, s, leafIndex)
 	if (child == null)
 	{
 		this.setStatus(2, "No edge out of this node starts with '" + s.charAt(0) + "': add a leaf for \"" + s + "\"");
-		var leaf = this.newNode(s, leafIndex);
+		var pos = this.spawnBelow(node);
+		var leaf = this.newNode(s, leafIndex, node, pos[0], pos[1]);
 		this.addChild(node, leaf);
 		this.connect(node, leaf);
 		this.cmd("Step");
@@ -456,7 +492,9 @@ SuffixTree.prototype.insertSuffix = function(node, s, leafIndex)
 	this.edgeHighlight(node, child, 0);
 	this.cmd("Disconnect", node.graphicID, child.labelID);
 
-	var mid = this.newNode(lab.substring(0, k), -1);
+	var mid = this.newNode(lab.substring(0, k), -1, node,
+	                       node.x + SuffixTree.SPLIT_AT * (child.x - node.x),
+	                       node.y + SuffixTree.SPLIT_AT * (child.y - node.y));
 	this.replaceChild(node, child, mid);
 	child.label = lab.substring(k);
 	this.cmd("SetText", child.labelID, child.label);
@@ -470,7 +508,8 @@ SuffixTree.prototype.insertSuffix = function(node, s, leafIndex)
 	this.cmd("Move", this.highlightID, mid.x, mid.y);
 	this.setStatus(2, "Add a leaf for the rest, \"" + s.substring(k) + "\"");
 	this.cmd("Step");
-	var leaf = this.newNode(s.substring(k), leafIndex);
+	pos = this.spawnBelow(mid);
+	var leaf = this.newNode(s.substring(k), leafIndex, mid, pos[0], pos[1]);
 	this.addChild(mid, leaf);
 	this.connect(mid, leaf);
 	this.cmd("Step");

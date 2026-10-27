@@ -24,6 +24,12 @@
 // authors and should not be interpreted as representing official policies, either expressed
 // or implied, of the University of San Francisco
 
+// DATrace: one font for all canvas text (node values, edge labels, status line).
+// Upstream hard-coded '10px sans-serif' in six files; change the size here.
+var CANVAS_FONT_SIZE = 13;
+var CANVAS_FONT_FAMILY = 'sans-serif';
+var CANVAS_FONT = CANVAS_FONT_SIZE + 'px ' + CANVAS_FONT_FAMILY;
+
 function AnimatedObject()
 {
 	this.init();

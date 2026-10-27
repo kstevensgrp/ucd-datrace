@@ -64,7 +64,7 @@ AnimatedLabel.prototype.draw = function(ctx)
 	}
 	
 	ctx.globalAlpha = this.alpha;
-	ctx.font = '10px sans-serif';
+	ctx.font = CANVAS_FONT;
 
         var startingXForHighlight = this.x; 
 

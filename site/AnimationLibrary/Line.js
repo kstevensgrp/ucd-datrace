@@ -149,7 +149,7 @@ function Line(n1, n2, color, cv, d, weight, anchorIndex)
 
 
 		context.textAlign = 'center';
-		context.font         = '10px sans-serif';
+		context.font         = CANVAS_FONT;
 		context.textBaseline   = 'middle'; 
 		context.fillText(this.edgeLabel, labelPosX, labelPosY);
 

@@ -561,7 +561,7 @@ function ObjectManager()
 	this.getTextWidth = function(text)
 	{
 		// TODO:  Need to make fonts more flexible, and less hardwired.
-		this.ctx.font = '10px sans-serif';
+		this.ctx.font = CANVAS_FONT;
 		if (text==undefined)
 		{
 			w = 3;

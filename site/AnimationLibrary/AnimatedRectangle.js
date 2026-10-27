@@ -279,7 +279,14 @@ AnimatedRectangle.prototype.draw = function(context)
 	context.fillStyle = this.labelColor;
 	
 	context.textAlign = 'center';
-	context.font         = '10px sans-serif';
+	context.font         = CANVAS_FONT;
+	// DATrace: shrink a label that would overflow its box (narrow array cells), down to 9px
+	var labelWidth = context.measureText(this.label).width;
+	if (labelWidth > this.w - 4)
+	{
+		var fitSize = Math.max(9, Math.floor(CANVAS_FONT_SIZE * (this.w - 4) / labelWidth));
+		context.font = fitSize + 'px ' + CANVAS_FONT_FAMILY;
+	}
 	context.textBaseline   = 'middle'; 
 	context.lineWidth = 1;
 	context.fillText(this.label, this.x, this.y); 
