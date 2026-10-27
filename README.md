@@ -33,6 +33,13 @@ python3 -m http.server 8080
 # open http://localhost:8080/Algorithms.html
 ```
 
+## Adding a visualization
+
+Copy `site/template.html` to `site/NAME.html` and write `site/AlgorithmLibrary/NAME.js`
+following the pattern in `BST.js` (the file header says which placeholders to
+fill). Add a link in `site/Algorithms.html`. Galles' tutorial for the animation
+API is at <https://www.cs.usfca.edu/~galles/visualization/source.html>.
+
 ## Attribution
 
 Copyright 2011 David Galles, University of San Francisco. Redistributed under
