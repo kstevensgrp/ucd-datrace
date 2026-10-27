@@ -35,3 +35,12 @@
 .VisualizationMainPage #mainContent h1,
 .VisualizationMainPage #mainContent h2,
 .VisualizationMainPage #mainContent h3 { color: #022851; }
+
+/* Animation-speed slider (jQuery UI). The theme's images/ folder was never in Galles'
+   tarball, so its image backgrounds 404; flat Aggie colors replace them. These selectors
+   outrank the theme's because jquery-ui-*.css loads after this file. */
+.VisualizationMainPage .ui-widget-content { background: #ffffff; border: 1px solid #9fb3c8; }
+.VisualizationMainPage .ui-widget-content .ui-state-default { background: #022851; border: 1px solid #022851; }
+.VisualizationMainPage .ui-widget-content .ui-state-hover,
+.VisualizationMainPage .ui-widget-content .ui-state-focus,
+.VisualizationMainPage .ui-widget-content .ui-state-active { background: #FFBF00; border: 1px solid #C99700; }
