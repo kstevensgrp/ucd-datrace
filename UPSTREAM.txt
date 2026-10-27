@@ -1,0 +1,5 @@
+upstream: https://www.cs.usfca.edu/~galles/visualization/source.html
+file: visualization1.5.tar.gz (JavascriptVisualRelease/)
+sha256: f884442901771d8a0d4b16635f2f6f9b37797cc6c6c23efd05e951d364e778c9
+fetched: 2026-10-27
+removed on import: FlashTest/ (ActionScript sources and .swf, 5.4 MB), ._* AppleDouble files, .DS_Store
