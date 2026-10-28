@@ -3,3 +3,14 @@ file: visualization1.5.tar.gz (JavascriptVisualRelease/)
 sha256: f884442901771d8a0d4b16635f2f6f9b37797cc6c6c23efd05e951d364e778c9
 fetched: 2026-10-27
 removed on import: FlashTest/ (ActionScript sources and .swf, 5.4 MB), ._* AppleDouble files, .DS_Store
+removed later (unused or broken, 2026-10-27):
+  Flash version: FlashTest.swf, flash.html; source.html (links now point to the USF original)
+  stray files: RedBlack.ps, USFlogo.jpg, slideTest.html, scratch, VisualizationLibrary,
+    QueueLL (extensionless copy of AlgorithmLibrary/QueueLL.js), ClosedHash2.JS (old ClosedHash.js),
+    *.js~ editor backups in AlgorithmLibrary/ and AnimationLibrary/
+  tutorial/test scaffolding: SimpleStack.html, AlgorithmLibrary/SimpleStack.js, MyAlgorithm.js,
+    EventTest.js, TestAlgorithmOld.js (site/template.html replaces the tutorial starter)
+  dead modules: AlgorithmLibrary/DPMatrixMultiply.js (an unfinished copy of DPLCS.js, no page),
+    AlgorithmLibrary/TrinarySearchTree.js (older draft of TST.js)
+  timages/ (jQuery UI theme images, misplaced: the CSS expects ThirdParty/images/; the speed
+    slider is styled in site/datrace.css instead)
