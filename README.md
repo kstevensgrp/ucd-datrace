@@ -43,5 +43,5 @@ API is at <https://www.cs.usfca.edu/~galles/visualization/source.html>.
 ## Attribution
 
 Copyright 2011 David Galles, University of San Francisco. Redistributed under
-the BSD 2-clause license in `LICENSE.txt`. UC Davis branding, page text and
-any later changes are by Kristian Stevens.
+the BSD 2-clause license in `LICENSE.txt`. Changes copyright (c) 2026 The
+Regents of the University of California, under the same license.
