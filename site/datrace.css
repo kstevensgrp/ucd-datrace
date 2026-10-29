@@ -3,9 +3,9 @@
    Loaded after visualPages.css / visualizationPageStyle.css. */
 
 #dtMasthead {
-  max-width: 1000px;
-  margin: 18px auto 6px auto;
-  padding: 0 10px 8px 10px;
+  /* full window width, with the same side gutters at any size */
+  margin: 18px 24px 6px 24px;
+  padding: 0 0 8px 0;
   border-bottom: 2px solid #022851;
   display: flex;
   align-items: baseline;
@@ -17,9 +17,8 @@
 #dtMasthead .dtCampus { height: 22px; display: block; }
 
 #dtFooter {
-  max-width: 1000px;
-  margin: 24px auto 18px auto;
-  padding: 8px 10px 0 10px;
+  margin: 24px 24px 18px 24px;
+  padding: 8px 0 0 0;
   border-top: 1px solid #022851;
   font: 80% Verdana, Arial, Helvetica, sans-serif;
   color: #444;
