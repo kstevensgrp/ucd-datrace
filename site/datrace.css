@@ -7,7 +7,7 @@
    program name swaps in without moving the rule or the page below it. */
 :root {
   /* --campus-mark: url(img/ucdavis-wordmark-blue.svg); --campus-mark-height: 22px; */
-  --campus-mark: url(img/ucdavis-cs-wordmark.svg); --campus-mark-height: 22px;
+  --campus-mark: url(img/ucdavis-cs-wordmark.svg); --campus-mark-height: 26px;
 }
 
 #dtMasthead {
@@ -51,3 +51,43 @@
 .VisualizationMainPage .ui-widget-content .ui-state-hover,
 .VisualizationMainPage .ui-widget-content .ui-state-focus,
 .VisualizationMainPage .ui-widget-content .ui-state-active { background: #FFBF00; border: 1px solid #C99700; }
+
+/* Course pages (course.html?NAME, data in courses/NAME.js, rendered by course.js). */
+.course { font: 15px/1.5 Verdana, Arial, Helvetica, sans-serif; color: #222; max-width: 820px; padding: 4px 24px 0 16px; }
+.course h1 { font-size: 26px; margin: 18px 0 4px 0; color: #022851; }
+.course .lede { margin: 0 0 14px 0; color: #333; }
+.course a { color: #022851; text-decoration: none; }
+.course a:hover { color: #C99700; }
+
+.course .jump { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px 0; padding: 0; list-style: none; }
+.course .jump a { display: block; font-size: 13px; padding: 3px 10px; border: 1px solid #b9c6d6; border-radius: 14px; }
+.course .jump a:hover { border-color: #C99700; }
+.course .jump b { color: #C99700; margin-right: 4px; }
+
+.course .aside { font-size: 13px; color: #555; margin: 14px 0 0 0; padding: 8px 12px; background: #f3f5f8; border-left: 3px solid #b9c6d6; }
+
+.course .unit { border-top: 1px solid #d5dde7; margin-top: 22px; padding-top: 12px; }
+.course .unit header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 6px; }
+.course .unit .num { font-size: 12px; font-weight: bold; letter-spacing: .08em; text-transform: uppercase; color: #C99700; }
+.course .unit h2 { font-size: 20px; margin: 0; color: #022851; flex: 1 1 auto; }
+.course .unit .read { font-size: 13px; white-space: nowrap; }
+
+.course .viz { list-style: none; margin: 0; padding: 0; }
+.course .viz li { display: grid; grid-template-columns: 76px 1fr; gap: 0 12px; padding: 7px 0; }
+.course .viz li + li { border-top: 1px dotted #e1e6ee; }
+.course .viz .sec { font-size: 12px; color: #6b7a8c; padding-top: 2px; font-variant-numeric: tabular-nums; }
+.course .viz .name { font-weight: bold; }
+.course .viz small { color: #6b7a8c; }
+.course .viz p { margin: 2px 0 0 0; font-size: 13.5px; color: #444; }
+.course .unit .gaps { font-size: 12.5px; color: #6b7a8c; margin: 6px 0 0 88px; }
+
+.course .beyond { border-top: 2px solid #022851; margin-top: 30px; padding-top: 12px; }
+.course .beyond h2 { font-size: 18px; margin: 0 0 4px 0; color: #022851; }
+.course .beyond p { margin: 4px 0; font-size: 14px; }
+
+@media (max-width: 700px) {
+  .coursePage .menu { display: none; }
+  div.content.course { margin-left: 0; border-left: none; padding: 0 16px; }
+  .course .viz li { grid-template-columns: 1fr; }
+  .course .unit .gaps { margin-left: 0; }
+}
