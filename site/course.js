@@ -37,11 +37,47 @@
 			' See <a href="Algorithms.html">all visualizations</a>.</p>';
 	}
 
+	// A reading chip: "Gusfield §1.2–§1.5" shows the book in bold; with a url it links (e.g. to Canvas).
+	function reading(r) {
+		if (typeof r === "string") r = { text: r };
+		var m = /^(.+?)\s+((?:§|Ch\.|pp?\.).*)$/.exec(r.text), body;
+		body = m ? "<b>" + esc(m[1]) + "</b> " + esc(m[2]) : esc(r.text);
+		return r.url ? '<a class="rd" href="' + esc(safeUrl(r.url)) + '">' + body + "</a>" : '<span class="rd">' + body + "</span>";
+	}
+
+	// A visualization slot: { page, name } links to a page; { planned: "Name" } is a placeholder.
+	function vizSlot(v) {
+		if (v.page) return '<a class="vz live" href="' + esc(safeUrl(v.page)) + '"><span class="ic">&#9654;</span>' + esc(v.name) + "</a>";
+		return '<span class="vz planned" title="Planned visualization"><span class="ic">&#9675;</span>' + esc(v.planned) + "</span>";
+	}
+
+	function topics(list) {
+		var h = ['<ol class="topics">'];
+		list.forEach(function (t) {
+			if (t.part) { h.push('<li class="part">' + esc(t.part) + "</li>"); return; }
+			var viz = [].concat(t.viz || []);
+			h.push('<li class="topic' + (viz.length ? "" : " noviz") + '"><div class="tx"><span class="tt">' +
+				(t.read ? '<a href="' + esc(safeUrl(t.read)) + '">' + inline(t.title) + "</a>" : inline(t.title)) + "</span>" +
+				(t.note ? "<p>" + inline(t.note) + "</p>" : "") +
+				(t.readings ? '<span class="rds">' + [].concat(t.readings).map(reading).join("") + "</span>" : "") + "</div>" +
+				'<div class="vzs">' + viz.map(vizSlot).join("") + "</div></li>");
+		});
+		h.push("</ol>");
+		return h.join("");
+	}
+
 	window.DATraceCourse = function (c) {
 		var h = [];
 		document.title = c.course + " · DATrace @ UC Davis";
-		h.push("<h1>" + esc(c.course) + "</h1>");
+		h.push("<h1>" + esc(c.course) + (c.subtitle ? ' <span class="sub">' + esc(c.subtitle) + "</span>" : "") + "</h1>");
 		if (c.intro) h.push('<p class="lede">' + inline(c.intro) + "</p>");
+		if (c.books) {
+			h.push('<dl class="books">');
+			c.books.forEach(function (b) {
+				h.push("<dt>" + esc(b.abbr) + "</dt><dd>" + inline(b.title) + "</dd>");
+			});
+			h.push("</dl>");
+		}
 
 		var units = c.units || [];
 		h.push('<ul class="jump">');
@@ -51,13 +87,19 @@
 		});
 		h.push("</ul>");
 		if (c.aside) h.push('<p class="aside">' + inline(c.aside) + "</p>");
+		if (units.some(function (u) { return u.topics; })) {
+			h.push('<p class="key"><span class="vz live"><span class="ic">&#9654;</span>Animation</span> opens a visualization' +
+				' <span class="vz planned"><span class="ic">&#9675;</span>Planned</span> is in the works</p>');
+		}
 
 		units.forEach(function (u) {
 			h.push('<section class="unit" id="' + esc(u.id) + '"><header>');
 			if (u.label) h.push('<span class="num">' + esc(u.label) + "</span>");
-			h.push("<h2>" + esc(u.title) + "</h2>");
-			if (u.read) h.push('<a class="read" href="' + esc(safeUrl(u.read)) + '">Read the chapter &#8599;</a>');
-			h.push('</header><ul class="viz">');
+			h.push("<h2>" + esc(u.title) + (u.meta ? ' <span class="meta">' + esc(u.meta) + "</span>" : "") + "</h2>");
+			if (u.read) h.push('<a class="read" href="' + esc(safeUrl(u.read)) + '">' + esc(u.readLabel || c.readLabel || "Read the chapter") + " &#8599;</a>");
+			h.push("</header>");
+			if (u.topics) { h.push(topics(u.topics)); h.push("</section>"); return; }
+			h.push('<ul class="viz">');
 			(u.items || []).forEach(function (it) {
 				var sec = [].concat(it.sec || []).map(esc).join("<br>");
 				h.push('<li><span class="sec">' + sec + '</span><div><a class="name" href="' +
