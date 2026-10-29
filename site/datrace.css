@@ -2,6 +2,14 @@
    visualization pages. Aggie Blue #022851, Aggie Gold #FFBF00.
    Loaded after visualPages.css / visualizationPageStyle.css. */
 
+/* Campus mark at the right of the masthead. Comment one pair in, the other
+   out; the <img>'s own src is only the fallback. Any height up to the 30px
+   program name swaps in without moving the rule or the page below it. */
+:root {
+  /* --campus-mark: url(img/ucdavis-wordmark-blue.svg); --campus-mark-height: 22px; */
+  --campus-mark: url(img/ucdavis-cs-wordmark.svg); --campus-mark-height: 22px;
+}
+
 #dtMasthead {
   /* full window width, with the same side gutters at any size */
   margin: 18px 24px 6px 24px;
@@ -14,7 +22,7 @@
 }
 #dtMasthead a { line-height: 0; }
 #dtMasthead .dtWordmark { height: 30px; display: block; }
-#dtMasthead .dtCampus { height: 22px; display: block; }
+#dtMasthead .dtCampus { content: var(--campus-mark); height: var(--campus-mark-height); display: block; }
 
 #dtFooter {
   margin: 24px 24px 18px 24px;
